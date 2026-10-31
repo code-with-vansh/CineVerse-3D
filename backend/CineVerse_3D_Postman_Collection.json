@@ -1,0 +1,221 @@
+{
+  "info": {
+    "name": "CineVerse 3D REST API Collection",
+    "description": "Comprehensive Postman Collection for CineVerse 3D Movie Ticket Booking Platform (Phase 3 Backend)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "userToken", "value": "" },
+    { "key": "adminToken", "value": "" },
+    { "key": "sampleMovieId", "value": "" },
+    { "key": "sampleShowId", "value": "" },
+    { "key": "bookingReference", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rohan Roy\",\n  \"email\": \"rohan@cineverse.com\",\n  \"password\": \"Password@123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@cineverse.com\",\n  \"password\": \"User@123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@cineverse.com\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Get Current User (Me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Movies",
+      "item": [
+        {
+          "name": "Get All Movies",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/movies"
+          }
+        },
+        {
+          "name": "Filter Movies by Language",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/movies/language/Tamil"
+          }
+        },
+        {
+          "name": "Search Movies",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/movies/search?q=Kalki"
+          }
+        },
+        {
+          "name": "Now Showing Movies",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/movies/now-showing"
+          }
+        },
+        {
+          "name": "Upcoming Movies",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/movies/upcoming"
+          }
+        },
+        {
+          "name": "Get Movie by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/movies/{{sampleMovieId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Theatres & Shows",
+      "item": [
+        {
+          "name": "Get All Theatres",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/theatres"
+          }
+        },
+        {
+          "name": "Get Theatres by City",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/theatres/city/Mumbai"
+          }
+        },
+        {
+          "name": "Get Shows with Filters",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/shows?city=Bengaluru"
+          }
+        },
+        {
+          "name": "Get Show by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/shows/{{sampleShowId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dynamic Seats (3D Cinema Hall)",
+      "item": [
+        {
+          "name": "Get Show Dynamic Seats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/shows/{{sampleShowId}}/seats"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings & Concurrency Holds",
+      "item": [
+        {
+          "name": "Hold Seats (Lock Concurrency-Safe)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"showId\": \"{{sampleShowId}}\",\n  \"seatIds\": [\"seat-id-1\", \"seat-id-2\"]\n}"
+            },
+            "url": "{{baseUrl}}/bookings/hold"
+          }
+        },
+        {
+          "name": "Release Seat Hold",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingReference\": \"{{bookingReference}}\"\n}"
+            },
+            "url": "{{baseUrl}}/bookings/release"
+          }
+        },
+        {
+          "name": "Get Booking by Reference",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/bookings/{{bookingReference}}"
+          }
+        },
+        {
+          "name": "Get User Bookings",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/users/me/bookings"
+          }
+        }
+      ]
+    }
+  ]
+}
