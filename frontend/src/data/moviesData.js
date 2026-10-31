@@ -18,6 +18,67 @@ export const FORMATS = [
 
 export const MOVIES = [
   {
+    id: 'pushpa-2-the-rule',
+    title: 'Pushpa 2: The Rule',
+    tagline: 'As The World Bows, The Rule Begins. Wildfire Unleashed.',
+    poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
+    banner: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1920&q=80',
+    trailerUrl: 'https://www.youtube.com/embed/v6Oh1DkZXiY',
+    videoPreview: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+    language: 'Telugu',
+    availableLanguages: ['Telugu', 'Hindi', 'Tamil', 'Kannada', 'Malayalam'],
+    genre: ['Action', 'Crime', 'Thriller', 'Drama'],
+    duration: '3h 15m',
+    releaseDate: '2024-12-05',
+    rating: 9.3,
+    voteCount: '340.2K',
+    certificate: 'U/A 16+',
+    formats: ['IMAX 3D', '3D', '4DX 3D', 'Dolby Cinema', '2D'],
+    status: 'now_showing',
+    featured: true,
+    ringOrder: 1,
+    accentColor: '#dc2626',
+    description: 'Pushpa Raj solidifies his undisputed reign over the red sandalwood smuggling empire while facing merciless retribution from SP Bhanwar Singh Shekhawat. An explosive clash of ego, power, and survival.',
+    director: 'Sukumar',
+    musicDirector: 'Devi Sri Prasad',
+    cast: [
+      { name: 'Allu Arjun', role: 'Pushpa Raj', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
+      { name: 'Rashmika Mandanna', role: 'Srivalli', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80' },
+      { name: 'Fahadh Faasil', role: 'SP Bhanwar Singh Shekhawat', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80' },
+      { name: 'Jagapathi Babu', role: 'Dharmendra', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80' }
+    ],
+    theatres: [
+      {
+        id: 'inox-megaplex',
+        name: 'INOX Megaplex: Laser IMAX',
+        address: 'Inorbit Mall, Level 4',
+        distance: '2.4 km away',
+        screenFormat: 'IMAX 3D',
+        cancellationAvailable: true,
+        showtimes: [
+          { time: '10:00 AM', format: 'IMAX 3D', priceRange: '₹350 - ₹650', status: 'almost_full' },
+          { time: '01:45 PM', format: 'IMAX 3D', priceRange: '₹350 - ₹650', status: 'filling_fast' },
+          { time: '05:30 PM', format: 'IMAX 3D', priceRange: '₹400 - ₹750', status: 'almost_full' },
+          { time: '09:15 PM', format: 'IMAX 3D', priceRange: '₹400 - ₹750', status: 'available' }
+        ]
+      },
+      {
+        id: 'pvr-icon-gold',
+        name: 'PVR ICON: Gold Class & Dolby Atmos',
+        address: 'Infinity Mall, Sector 9',
+        distance: '4.8 km away',
+        screenFormat: 'Dolby Cinema',
+        cancellationAvailable: true,
+        showtimes: [
+          { time: '11:00 AM', format: '3D', priceRange: '₹280 - ₹500', status: 'available' },
+          { time: '03:15 PM', format: '3D', priceRange: '₹280 - ₹500', status: 'available' },
+          { time: '07:00 PM', format: '3D', priceRange: '₹320 - ₹550', status: 'almost_full' },
+          { time: '10:45 PM', format: '3D', priceRange: '₹320 - ₹550', status: 'available' }
+        ]
+      }
+    ]
+  },
+  {
     id: 'kalki-2898-ad',
     title: 'Kalki 2898 AD',
     tagline: 'The Future Has Begun. An Epic Odyssey Beyond Time.',

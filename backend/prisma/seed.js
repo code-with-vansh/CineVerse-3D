@@ -82,7 +82,7 @@ async function main() {
       description: 'Pushpa Raj solidifies his undisputed reign over the red sandalwood smuggling empire while facing merciless retribution from SP Bhanwar Singh Shekhawat.',
       poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
       banner: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1920&q=80',
-      trailerUrl: 'https://www.youtube.com/embed/g3JUbgFBWu8',
+      trailerUrl: 'https://www.youtube.com/embed/v6Oh1DkZXiY',
       language: 'Telugu',
       genre: 'Action, Crime, Thriller',
       duration: '195 min',
