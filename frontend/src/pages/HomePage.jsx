@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Curved3DCarousel } from '../components/carousel/Curved3DCarousel';
+import { MovieTrailerHeroCarousel } from '../components/carousel/MovieTrailerHeroCarousel';
 import { LanguageFilter } from '../components/movies/LanguageFilter';
 import { MovieGrid } from '../components/movies/MovieGrid';
 import { TrailerModal } from '../components/movies/TrailerModal';
@@ -38,16 +38,29 @@ export const HomePage = ({
         ...(selectedLanguage && selectedLanguage !== 'All' ? { language: selectedLanguage } : {}),
       });
       if (data?.movies && data.movies.length > 0) {
-        // Map database movies to ensure frontend compatibility
-        const mapped = data.movies.map((m) => ({
-          ...m,
-          availableLanguages: [m.language],
-          genre: typeof m.genre === 'string' ? m.genre.split(',').map((g) => g.trim()) : m.genre,
-          voteCount: '200K+',
-          certificate: 'U/A 16+',
-          formats: ['IMAX 3D', '3D', 'Dolby Cinema', '2D'],
-          status: 'now_showing',
-        }));
+        // Map database movies to ensure frontend compatibility and rich video/banner assets
+        const mapped = data.movies.map((m) => {
+          const fallback = FALLBACK_MOVIES.find(
+            (f) => f.id === m.id || f.title.toLowerCase() === m.title.toLowerCase()
+          );
+          return {
+            ...fallback,
+            ...m,
+            trailerUrl: m.trailerUrl || fallback?.trailerUrl,
+            videoPreview: fallback?.videoPreview,
+            banner: m.banner || fallback?.banner,
+            poster: m.poster || fallback?.poster,
+            availableLanguages: fallback?.availableLanguages || [m.language],
+            genre: typeof m.genre === 'string' ? m.genre.split(',').map((g) => g.trim()) : (m.genre || fallback?.genre || ['Action']),
+            formats: fallback?.formats || ['IMAX 3D', '3D', 'Dolby Cinema', '2D'],
+            tagline: fallback?.tagline || m.description.slice(0, 90) + '...',
+            certificate: fallback?.certificate || 'U/A 16+',
+            rating: m.rating || fallback?.rating || 8.8,
+            duration: m.duration || fallback?.duration || '2h 45m',
+            voteCount: fallback?.voteCount || '200K+',
+            status: 'now_showing',
+          };
+        });
         setMovies(mapped);
         setIsFromDatabase(true);
       }
@@ -66,8 +79,11 @@ export const HomePage = ({
 
   return (
     <div className="min-h-screen bg-[#08090d] text-white">
-      {/* 3D Ring Carousel Hero Showcase */}
-      <Curved3DCarousel movies={movies.slice(0, 10)} />
+      {/* Full-Width Cinematic Movie Trailer Carousel Hero */}
+      <MovieTrailerHeroCarousel 
+        movies={movies} 
+        onOpenTrailerModal={(movie) => setActiveTrailerMovie(movie)}
+      />
 
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
